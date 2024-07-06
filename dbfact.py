@@ -72,8 +72,13 @@ class Db:
 
 
 if __name__=="__main__":
-    #new("mydb", ["id", "name", "age"], "id")
-    db=Db("mydb")
-    db.insert({"name" : "sncf", "age" : 100})
-    print(db.select("name", "kilian"))
-    print(db.select())
+    new("companies", ["id", "company", "website"], primary="id") #create a database called companies with three columns id, company and website and defines id as a primary key
+    db=Db("companies") #Load the database called companies
+    #Insert companies and websites
+    db.insert({"company" : "Google", "website" : "https://google.com"})
+    db.insert({"company" : "Apple", "website" : "https://apple.com"})
+    db.insert({"company" : "Amazon", "website" : "https://amazon.com"})
+    #Select using name of the companies
+    results=db.select("company", "Google") #List of dicts like {"id" : "uuid", "company" : "Google", "website" : "https://google.com"}
+    print(results[0]["website"])
+    results=db.select() #Returns all the companies in the database
